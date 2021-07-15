@@ -23,14 +23,15 @@ public class DiceBot {
         commandListener.registerCommand(bot);
     }
 
-    public static void main(String[] args) throws LoginException {
+    public static void main(String[] args) {
         try {
             String token = System.getenv("token");
             if (token == null) throw new NullPointerException("Missing 'token' environment variable");
             DiceBot instance = new DiceBot(token);
             instance.start();
-        } catch (InterruptedException exception) {
+        } catch (InterruptedException | LoginException exception) {
             exception.printStackTrace();
+            System.exit(0);
         }
     }
 
